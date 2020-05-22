@@ -1,7 +1,7 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 
-import { createDrawerNavigator } from 'react-navigation/drawer';
-import { NavigationContainer } from 'react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 
 import Login from './pages/Login'
 //deashbord
