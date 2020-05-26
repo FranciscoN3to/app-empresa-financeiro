@@ -1,44 +1,60 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, Dimensions, TouchableOpacity, SafeAreaView } from 'react-native'
+import Icon  from 'react-native-vector-icons/MaterialIcons'
 
+//Icon.loadFont();
 
 //const Drawer = createDrawerNavigator();
 
-export default function Header({ navigation }){
-    console.log(navigation)
+console.log(Dimensions.get('window').width)
+
+export default function Header({ navigation, title }){
+
     const OpenMenu = () => {
         navigation.openDrawer()
     }
 
     return (
-        <View style={styleHead.header}>
-            <View>
-                <Button onPress={OpenMenu} title="Alo"></Button>
+        <SafeAreaView style={styleHead.header}>
+            <TouchableOpacity onPress={OpenMenu} style={styleHead.menuButton}>
+                <Icon name="menu" style={styleHead.menuIcon}/>
+            </TouchableOpacity>
+            <View style={styleHead.headerTextBox}>
+                <Text style={styleHead.headerText}>{title}</Text>
             </View>
-            <View>
-                <Text style={styleHead.headerText}>Home</Text>
-            </View>
-        </View>
+        </SafeAreaView>
     )
 }
 
 const styleHead = StyleSheet.create({
 
     header:{
-        width: '100%',
+        width: Dimensions.get('window').width,
         height: 46,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ddd',
-        //flex: 1,
+        backgroundColor: '#fff',
+        borderBottomWidth: 1,
+        borderColor: '#ddd'
         
     },
+    headerTextBox: {
+        width: (Dimensions.get('window').width - 90),
+    },
     headerText:{
-        fontWeight: 'bold',
-        fontSize: 20,
+        textAlign: 'center',
+        width: '100%',
+        fontWeight: '600',
+        fontSize: 18,
         color: '#333',
-        letterSpacing: 1
+    },
+    menuButton: {
+        margin: 10,
+        width: 25,
+    },
+    menuIcon: {
+        fontSize: 25,
+        color: '#000'
     }
 
 })

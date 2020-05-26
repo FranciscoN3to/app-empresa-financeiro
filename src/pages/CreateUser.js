@@ -1,10 +1,18 @@
 import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 
-export default function CreateUser() {
-    return (
-        <View>
-            <Text>AAA</Text>
-        </View>
-    )
+import Header from '../../shared/Header'
+
+const CreateUser = { 
+    title: 'Novo usuário',
+    Screen({ navigation }) {
+        return (
+            <View>
+                <Header navigation={navigation} title={CreateUser.title} />
+                <Text>aa</Text>
+            </View>
+        )
+    }
 }
+
+export default CreateUser
