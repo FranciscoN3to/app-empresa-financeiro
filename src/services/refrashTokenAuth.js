@@ -4,21 +4,41 @@ import AsyncStorage from '@react-native-community/async-storage'
 const RefrashAccessToken = async () => {
 
     const refrashToken = await AsyncStorage.getItem('refrashToken')
+    const response = await apiAuth.post('/token', { token: refrashToken })
+        .then(async response => {
 
-    return new Promise((resolve, reject) => {
+            await AsyncStorage.setItem('accessToken', response.data.accessToken)
 
-        apiAuth.post('/token', { token: refrashToken })
-        then( async (newToken) => {
-            await AsyncStorage.setItem('accessToken', newToken.accessToken)
-            resolve(true)
+            return true
+
         })
-        .catch(() => {
-            reject(false)
+        .catch(error => {
+            return false
         })
+  
+    return response
 
-    })
-
+   
 } 
 
 export default RefrashAccessToken
 
+/*
+ return new Promise((resolve, reject) => {
+   apiAuth.post('/token', { token: refrashToken })
+      then( async (newToken) => {
+
+    await AsyncStorage.setItem('accessToken', newToken.accessToken)
+    console.log('deu')
+    resolve({msg: 'aaa'})            
+
+})
+.catch((er) => {
+    console.log(er)
+    reject({msg: 'bbb'})
+})  
+        
+
+    })
+
+*/

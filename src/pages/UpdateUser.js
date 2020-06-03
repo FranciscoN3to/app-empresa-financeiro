@@ -1,18 +1,15 @@
 import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import HeaderSvg from '../svg/headerEditUser'
 
-import Header from '../../shared/Header'
+function UpdateUser() { 
 
-const UpdateUser = { 
-    title: 'Atualizar usuário',
-    Screen({ navigation }) {
-        return (
-            <View>
-                <Header navigation={navigation} title={UpdateUser.title} />
-                <Text>aa</Text>
-            </View>
-        )
-    }
+    return (
+        <View>            
+            <Text>a</Text>
+        </View>
+    )
+
 }
 
 export default UpdateUser

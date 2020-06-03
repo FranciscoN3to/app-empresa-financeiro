@@ -2,26 +2,22 @@ import React, { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
 import { KeyboardAvoidingView, Platform, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 
+import store from '../store'
+
+import { successLogin, requestLogin, failureLogin } from '../actions/auth'
+
 import { api, apiAuth } from '../services/api'
 
-export default function Login({ navigation }) {
+export default function Login() {
 
   const [ username, setUserName] = useState('')
   const [ password, setUserPass] = useState('')
 
-  
-  useEffect(() => {
-
-    AsyncStorage.getItem('refrashToken')
-    .then(token => {
-
-      if(token){ navigation.navigate('Main', {}) }
-      //AsyncStorage.clear();
-    })
-
-  }, [])
-
+  console.log(store.getState())
+ 
   function loginAuth() {
+
+    store.dispatch(requestLogin())
 
     apiAuth.post('/login', { username, password })
       .then(async (response) => {
@@ -38,14 +34,18 @@ export default function Login({ navigation }) {
           await AsyncStorage.setItem('email', dados[0].email)
           await AsyncStorage.setItem('privilegio', dados[0].privilegio)
 
-          navigation.navigate('Main')
+          store.dispatch(successLogin({
+            accessToken,
+            refrashToken,
+            username: dados[0].username,
+            email: dados[0].email,
+            privilegio: dados[0].privilegio
+          }))
 
         }
 
       })
-      .catch(error => console.log(error.response))
-
-      //return
+      .catch(error => store.dispatch(failureLogin(error.response.error)))
 
   }
 

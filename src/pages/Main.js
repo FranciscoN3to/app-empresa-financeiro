@@ -1,20 +1,16 @@
 import React from 'react'
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
+function Main({ navigation }) { 
+ 
+    return (
+        <View>
+            <ScrollView>
+                <Text >Aloo</Text>
+            </ScrollView>
+        </View>
+    )
 
-import Header from '../../shared/Header'
-
-const Main = { 
-    title: 'Dashboard',
-    Screen({ navigation }) {
-        return (
-            <View>
-                <Header navigation={navigation} title={Main.title} />
-                <ScrollView>
-                   
-                </ScrollView>
-            </View>
-        )
-    }
 }
 
 export default Main
